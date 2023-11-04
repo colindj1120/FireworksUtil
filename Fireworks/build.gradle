@@ -1,0 +1,30 @@
+// PaintRandomizer/build.gradle
+plugins {
+  id 'java'
+  id 'org.openjfx.javafxplugin' version '0.0.13'
+  id 'org.javamodularity.moduleplugin' version '1.8.12'
+}
+
+javafx {
+  version = '20.0.1'
+  modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+dependencies {
+  // Your dependencies here
+  implementation files('libs/PaintRandomizer-1.0.0.jar')
+}
+
+// Custom jar task for utility
+tasks.register('utilityJar', Jar) {
+  dependsOn 'build'  // Ensure classes are compiled
+
+  archiveBaseName.set('FireworksDisplay')  // Set the desired name for the JAR file
+  archiveVersion.set('1.0.0')  // Version of the JAR
+  destinationDirectory.set(file("$project.rootDir/out/jar"))  // Set custom output directory
+
+  from sourceSets.main.output.classesDirs
+
+  include 'com/hyperion/fireworks/FireworksDisplay*.class'
+  include 'module-info.class'
+}
