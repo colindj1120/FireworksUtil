@@ -1,0 +1,12 @@
+// Root build.gradle
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    group 'com.hyperion'
+    version = '1.0-SNAPSHOT'
+}
